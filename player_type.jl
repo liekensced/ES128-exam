@@ -9,12 +9,11 @@ mutable struct Player
 end
 
 function printCards(p::Player)
-    i = 0
-    for card in p.deck.cards
-      i += 1
-      printstyled("$i ", color=:blue)
-      print(card)
-      print("\t")
-    end
+  i = 0
+  for card in p.deck.cards
+    printstyled(card, bold=true)
+    print("\t")
   end
+  println()
+end
 
