@@ -11,7 +11,11 @@ end
 function printCards(p::Player)
   i = 0
   for card in p.deck.cards
-    printstyled(card, bold=true)
+    if(card.suit<3)
+      printstyled(card, bold=true, color=:red)
+    else
+      printstyled(card, bold=true)
+    end
     print("\t")
   end
   println()
