@@ -1,3 +1,10 @@
+#round 2 minste harten
+function hearts()
+  for round in 1:2
+    for Player.cards[i] in cards.deck
+      if Player.cards.suit[i] = ♡
+        Player.points = -1
+
 
 # Gets the 4 cards on the table
 # Cards[1] belongs to players[1]
@@ -39,3 +46,4 @@ function validCards(cards::Array{Card}, currentCards)::Array{Card}
   
   return valids
 end
+    

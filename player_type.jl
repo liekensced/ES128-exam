@@ -2,7 +2,7 @@
 mutable struct Player
   name::String
   points::Int64 # negative points are penalty points
-  deck::Deck #TODO type
+  deck::Deck 
   function Player(n::String)
     new(n,0,Deck(Card[]))
   end

@@ -22,7 +22,7 @@ function card2str(card::Card)
   return rank_names[card.rank]*suit_names[card.suit]
 end
 
-function isless(c1::Card, c2::Card)
+function Base.isless(c1::Card, c2::Card)
 	(c1.suit, c1.rank) < (c2.suit, c2.rank)
 	end
 
