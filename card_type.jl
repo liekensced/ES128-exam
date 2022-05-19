@@ -42,6 +42,7 @@ function fullDeck()
   return deck
 end
 
+# Clears the terminal
 function handOutCards()
   shuffle!(currentDeck.cards)
   for i in 1:4

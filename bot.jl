@@ -1,7 +1,7 @@
 # Has to return the index of the valid cards !
 # table of type Array{Card}
 
-function botPlay(cards::Array{Card}, table)
+function botPlay(cards::Array{Card}, table::Array)::Int64
   valids = validCards(cards, table)
 
   if (length(table) == 0)
@@ -16,9 +16,9 @@ function botPlay(cards::Array{Card}, table)
     return max(valids)[2]
   end
 
-  highestTableCard = max(table)[1]
-  highestrank = 0
-  index = 0
+  highestTableCard::Card = max(table)[1]
+  highestrank::Int64 = 0
+  index::Int64 = 0
   
   for (i, card) in enumerate(valids)
     if (highestTableCard.rank>card.rank)
@@ -41,8 +41,8 @@ function botPlay(cards::Array{Card}, table)
 end
 
 function min(cards::Array)
-  lowest = cards[1]
-  i = 0
+  lowest::Card = cards[1]
+  i::Int64 = 0
   for card in cards
     i += 1
     if (card.rank < lowest.rank)
@@ -53,8 +53,8 @@ function min(cards::Array)
 end
 
 function max(cards::Array)
-  highest = cards[1]
-  i = 0
+  highest::Card = cards[1]
+  i::Int64 = 0
   for card in cards
     i += 1
     if (card.rank > highest.rank)
