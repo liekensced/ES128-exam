@@ -25,7 +25,7 @@ global isWindows = Sys.iswindows()
 ## Repl.it runs in a linux environment so no probs there
 
 function run(cmd)
-  if(!isWindows)
+  if(isWindows)
     print("\n"^100)
     return
   end
