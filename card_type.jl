@@ -18,13 +18,13 @@ function Base.show(io::IO, card::Card)
 	print(io, rank_names[card.rank], suit_names[card.suit])
 end
 
-function card2str(card::Card)
-  return rank_names[card.rank]*suit_names[card.suit]
-end
-
 function Base.isless(c1::Card, c2::Card)
 	(c1.suit, c1.rank) < (c2.suit, c2.rank)
 	end
+
+function card2str(card::Card)
+  return rank_names[card.rank]*suit_names[card.suit]
+end
 
 mutable struct Deck
 	cards::Array{Card}
@@ -35,10 +35,10 @@ function fullDeck()
   
 	for suit in 1:4
 		for rank in 1:13
-     
 			push!(deck.cards, Card(suit, rank))
 		end
 	end
+  
   return deck
 end
 

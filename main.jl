@@ -1,8 +1,10 @@
-DEBUG = true
-DEBUGBOT = false
+const DEBUG = false
+const DEBUGBOT = false
+
 import REPL
 using Random
 using REPL.TerminalMenus
+
 include("card_type.jl")
 include("player_type.jl")
 include("ui.jl")
@@ -17,20 +19,38 @@ include("games/round5.jl")
 global troef = 1
 global tableCards = []
 global players = []
+global isWindows = Sys.iswindows()
 
+# On a windows machine you can't run `clear` (the command does not exist)
+## Repl.it runs in a linux environment so no probs there
 
+function run(cmd)
+  if(!isWindows)
+    print("\n"^100)
+    return
+  end
+  Base.run(cmd)
+end
+
+# Helper functions
 function tweakedIndex(i, offset)
   return (i-offset+3)%4+1
 end
 
+#Start of code
 for i in 1:4
   if(DEBUGBOT)
     name = "bot"
   elseif(DEBUG)
-    name = "Name $i"
+    name = "Player $i"
   else
     print("Enter name of player $i: ")
     name = readline()
+    if (name == "bot" || contains(name, "bot "))
+      #The \033[F \r will move the terminal cursor up and to the left, so it will rewrite the last line
+      print("\033[F\rEnter name of player $i: ")
+      printstyled("$name\n", color=:blue)
+    end
   end
   push!(players, Player(name))
 end
@@ -49,7 +69,7 @@ for game in 1:7
       player::Player = players[playerIndex]
       valids::Vector{Card} = validCards(player.deck.cards,tableCards)
 
-      if (player.name == "bot")
+      if (player.name == "bot" || contains(player.name, "bot "))
         index = botPlay(player.deck.cards, tableCards)
       else
         printstyled(player.name * " cards:\n", color=:cyan)

@@ -29,6 +29,7 @@ function checkPoints(cards::Array, offset::Int64, round::Int64, game::Int64)
     checkPoints2(cards, offset, round, game)
     return
   end
+
   currentSuit = cards[1].suit
   currentHighest = 0
   currentWinner = 0
