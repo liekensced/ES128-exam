@@ -1,5 +1,5 @@
 
-function checkPoints2(cards, offset, round::Int64, game::Int64)
+function checkPoints2(players, cards, offset, round::Int64, game::Int64)
   currentSuit = cards[1].suit
   currentHighest = 0
   currentWinner = 0

@@ -3,7 +3,7 @@
 # Cards[1] belongs to players[1]
 # to change points: players[i].points = players[i].points - 1
 
-function checkPoints(cards::Array, offset::Int64, round::Int64, game::Int64)
+function checkPoints(players, cards::Array, offset::Int64, round::Int64, game::Int64)
   if (game == 6)
     if (round != 7||round !=13)
       return
@@ -11,22 +11,22 @@ function checkPoints(cards::Array, offset::Int64, round::Int64, game::Int64)
   end
   
   if (game == 5)
-        checkPoints5(cards, offset, round, game)
+        checkPoints5(players, cards, offset, round, game)
     return
   end
   
   if (game == 4)
-    checkPoints4(cards, offset, round, game)
+    checkPoints4(players, cards, offset, round, game)
     return
   end
   
   if (game == 3)
-    checkPoints3(cards, offset, round, game)
+    checkPoints3(players, cards, offset, round, game)
     return
   end 
   
   if(game == 2)
-    checkPoints2(cards, offset, round, game)
+    checkPoints2(players, cards, offset, round, game)
     return
   end
 

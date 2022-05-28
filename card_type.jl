@@ -11,6 +11,9 @@ struct Card
 		@assert(1 ≤ rank ≤ 13, "rank is not between 1 and 13")
 		new(suit, rank)
 	end
+  function Card(d::Dict)
+    new(d["suit"], d["rank"])
+  end
 end
 
 
@@ -18,16 +21,22 @@ function Base.show(io::IO, card::Card)
 	print(io, rank_names[card.rank], suit_names[card.suit])
 end
 
-function Base.isless(c1::Card, c2::Card)
-	(c1.suit, c1.rank) < (c2.suit, c2.rank)
-	end
-
 function card2str(card::Card)
   return rank_names[card.rank]*suit_names[card.suit]
 end
 
+function Base.isless(c1::Card, c2::Card)
+	(c1.suit, c1.rank) < (c2.suit, c2.rank)
+	end
+
 mutable struct Deck
 	cards::Array{Card}
+  function Deck(c::Vector)
+    new(c)
+  end
+  function Deck(d::Dict)
+    new(map(c::Dict -> Card(c), d["cards"]))
+  end
 end
 	
 function fullDeck()
@@ -35,15 +44,14 @@ function fullDeck()
   
 	for suit in 1:4
 		for rank in 1:13
+     
 			push!(deck.cards, Card(suit, rank))
 		end
 	end
-  
   return deck
 end
 
-# Clears the terminal
-function handOutCards()
+function handOutCards(players)
   shuffle!(currentDeck.cards)
   for i in 1:4
     index = (i-1)*13

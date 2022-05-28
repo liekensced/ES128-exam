@@ -6,6 +6,10 @@ mutable struct Player
   function Player(n::String)
     new(n,0,Deck(Card[]))
   end
+  
+  function Player(d::Dict)
+    new(d["name"], d["points"], Deck(d["deck"]))
+  end
 end
 
 function printCards(p::Player)
