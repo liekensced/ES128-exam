@@ -16,6 +16,8 @@ include("games/round4.jl")
 include("games/round5.jl")
 #include("games/round7.jl")
 
+printking()
+
 global troef = 1
 global tableCards = []
 global players = []
