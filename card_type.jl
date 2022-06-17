@@ -29,7 +29,7 @@ end
 mutable struct Deck
 	cards::Array{Card}
 end
-	
+
 function fullDeck()
 	deck = Deck(Card[])
   

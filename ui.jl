@@ -1,4 +1,4 @@
-const HelpMessages = ["No Tricks","No Hearts","No Men","No Queens","No Heart King","Not 7th or last Trick","Troef"]
+const HelpMessages = ["No Tricks","No Hearts","No Men","No Queens","No Heart King","Not 7th or last Trick","Most tricks"]
 
 
 function tableCardsStrings(i::Int64)::String

@@ -9,10 +9,10 @@ function checkPoints5(cards, offset, round::Int64, game::Int64)
         currentWinner = i
     end
   end
-  players[(currentWinner+offset+3)%4+1].points -=  dames(cards)
+  players[(currentWinner+offset+3)%4+1].points -=  hheer(cards)
 end
 
-function dames(cards)
+function hheer(cards)
   i = 0
   for card in cards
     if card.rank == 12 && card.suit == 2

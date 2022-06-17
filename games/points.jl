@@ -1,9 +1,13 @@
-
 # Gets the 4 cards on the table
 # Cards[1] belongs to players[1]
 # to change points: players[i].points = players[i].points - 1
 
 function checkPoints(cards::Array, offset::Int64, round::Int64, game::Int64)
+  if (game==7)
+    checkPoints7(cards, offset, round, game)
+    return
+  end
+  
   if (game == 6)
     if (round != 7||round !=13)
       return
@@ -43,4 +47,3 @@ function checkPoints(cards::Array, offset::Int64, round::Int64, game::Int64)
     players[(currentWinner+offset+3)%4+1].points -= 1
     
 end
-

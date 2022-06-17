@@ -5,22 +5,21 @@ function botPlay(cards::Array{Card}, table::Array)::Int64
   valids = validCards(cards, table)
 
   if (length(table) == 0)
-    DEBUGBOT && println("Bot: random card")
-    DEBUGBOT && readline()
     return min(valids)[2]
     #return Random.rand(1:length(valids)) #alternative
   end
-
+  #valids[1] -> kaart and valids[2] -> index
   # The bot has not cards of the current suit
   if(valids[1].suit != table[1].suit)
     return max(valids)[2]
   end
-
+  
+  
   highestTableCard::Card = max(table)[1]
   highestrank::Int64 = 0
   index::Int64 = 0
   
-  for (i, card) in enumerate(valids)
+  for (i, card) in enumerate(valids) #enumerate is array v (i,card)
     if (highestTableCard.rank>card.rank)
       if (highestrank < card.rank)
         highestrank = card.rank

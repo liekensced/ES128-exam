@@ -25,7 +25,7 @@ function validCards(cards::Array, currentCards::Array)::Array
   if(isempty(currentCards))
     return cards
   end
-  currentSuit = currentCards[1].suit
+  currentSuit::Int64 = currentCards[1].suit
   valids::Array{Card} = []
   
   for card in cards

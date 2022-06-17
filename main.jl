@@ -5,6 +5,7 @@ import REPL
 using Random
 using REPL.TerminalMenus
 
+
 include("card_type.jl")
 include("player_type.jl")
 include("ui.jl")
@@ -14,11 +15,10 @@ include("games/round2.jl")
 include("games/round3.jl")
 include("games/round4.jl")
 include("games/round5.jl")
-#include("games/round7.jl")
+include("games/round7.jl")
 
 printking()
 
-global troef = 1
 global tableCards = []
 global players = []
 global isWindows = Sys.iswindows()
@@ -37,14 +37,15 @@ end
 # Helper functions
 function tweakedIndex(i, offset)
   return (i-offset+3)%4+1
-end
+end 
 
 #Start of code
+#init
 for i in 1:4
   if(DEBUGBOT)
     name = "bot"
   elseif(DEBUG)
-    name = "Player $i"
+    name = "Player $i" #"Player "*Parse(String, i)
   else
     print("Enter name of player $i: ")
     name = readline()
@@ -59,31 +60,32 @@ end
 
 global currentDeck = fullDeck()
 
+#Gameloop
 for game in 1:7
   handOutCards()
   for round in 1:13
     offset::Int64 = 0
-    showTable(offset, game, round) #offset isn't correct but it doesn't matter
+    showTable(offset, game, round) 
     for i in 1:4
       playerIndex::Int64 = (i + round + 2)%4 + 1
       
       offset = playerIndex - i
       player::Player = players[playerIndex]
       valids::Vector{Card} = validCards(player.deck.cards,tableCards)
-
+      #index is the index of validcards
       if (player.name == "bot" || contains(player.name, "bot "))
         index = botPlay(player.deck.cards, tableCards)
       else
         printstyled(player.name * " cards:\n", color=:cyan)
         printCards(player)
-        index = request("Select card: ", RadioMenu(map((card)-> rank_names[card.rank]*suit_names[card.suit], valids),pagesize=7, charset=:unicode))
+          index = request("Select card: ", RadioMenu(map((card)-> card2str(card), valids),pagesize=7, charset=:unicode)) # map maakt van alle card een string
       end
-      run(`clear`)
       choosen = valids[index]
       
       push!(tableCards, choosen)
       filter!(e::Card -> e.suit ≠ choosen.suit || e.rank ≠ choosen.rank, player.deck.cards)
   
+      run(`clear`)
       if(!DEBUG && i != 4)
         showTable(offset, game, round)
         println("Hand over to next player")
@@ -105,5 +107,7 @@ for game in 1:7
 end
 
 
+println("42")
+#waarom 42?
 println("done")
 readline()
